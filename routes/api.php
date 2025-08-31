@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PushNotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,11 @@ Route::get('/get-inventory',[InventoryController::class,'getInventory']);
 Route::post('/add-inventory',[InventoryController::class,'addInventory']);
 Route::post('/update-inventory',[InventoryController::class,'updateInventory']);
 Route::get('/delete-inventory',[InventoryController::class,'deleteInventory']);
+// Product
+Route::get('/get-product',[ProductController::class,'getProduct']);
+Route::post('/add-product',[ProductController::class,'addProduct']);
+Route::post('/update-product',[ProductController::class,'updateProduct']);
+Route::get('/delete-product',[ProductController::class,'deleteProduct']);
 
 // openAi Request
 Route::post('/ask-question',[ApiController::class,'askQuestion']);

@@ -1,22 +1,16 @@
 <template>
 <div
         class="modal fade"
-        id="kt_modal_add_inventory"
-        ref="addCustomerModalRef"
+        id="kt_modal_add_product"
+        ref="addProductModalRef"
         tabindex="-1"
         aria-hidden="true"
     >
-        <!--begin::Modal dialog-->
         <div class="modal-dialog modal-dialog-centered mw-650px">
-            <!--begin::Modal content-->
             <div class="modal-content">
-                <!--begin::Modal header-->
                 <div class="modal-header" id="kt_modal_add_customer_header">
-                    <!--begin::Modal title-->
-                    <h2 class="fw-bold">Add a inventory</h2>
-                    <!--end::Modal title-->
+                    <h2 class="fw-bold">Add Product</h2>
 
-                    <!--begin::Close-->
                     <div
                         id="kt_modal_add_customer_close"
                         data-bs-dismiss="modal"
@@ -29,19 +23,14 @@
                             @click="closeModal"
                         />
                     </div>
-                    <!--end::Close-->
                 </div>
-                <!--end::Modal header-->
-                <!--begin::Form-->
                 <el-form
                     @submit.prevent="submit()"
                     :model="formData"
                     :rules="rules"
                     ref="formRef"
                 >
-                    <!--begin::Modal body-->
                     <div class="modal-body py-10 px-lg-17">
-                        <!--begin::Scroll-->
                         <div
                             class="scroll-y me-n7 pe-7"
                             id="kt_modal_add_customer_scroll"
@@ -52,15 +41,11 @@
                             data-kt-scroll-wrappers="#kt_modal_add_customer_scroll"
                             data-kt-scroll-offset="300px"
                         >
-                            <!--begin::Input group-->
                             <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label class="required fs-6 fw-semobold mb-2"
-                                    >Service Name</label
-                                >
-                                <!--end::Label-->
+                                <label class="required fs-6 fw-semobold mb-2">
+                                  Name
+                                </label>
 
-                                <!--begin::Input-->
                                 <el-form-item prop="name">
                                     <el-input
                                         v-model="formData.name"
@@ -69,19 +54,13 @@
                                         placeholder="Please Enter Service Name"
                                     />
                                 </el-form-item>
-                                <!--end::Input-->
                             </div>
-                            <!--end::Input group-->
 
-                            <!--begin::Input group-->
                             <div class="fv-row mb-7">
-                                <!--begin::Label-->
                                 <label class="fs-6 fw-semobold mb-2"
                                     >Service Image</label
                                 >
-                                <!--end::Label-->
 
-                                <!--begin::Input-->
                                 <el-form-item prop="files">
                                     <input
                                         type="file"
@@ -91,9 +70,7 @@
                                         placeholder="Please Upload Image"
                                     />
                                 </el-form-item>
-                                <!--end::Input-->
                             </div>
-                            <!--end::Input group-->
 
                             <div v-if="selectedImages.length > 0" class="mb-3">
                                 <h4>Selected Files:</h4>
@@ -121,25 +98,12 @@
                                 id="kt_modal_add_customer_billing_info"
                                 class="collapse show"
                             ></div>
-                            <!--end::Billing form-->
                         </div>
-                        <!--end::Scroll-->
                     </div>
-                    <!--end::Modal body-->
 
-                    <!--begin::Modal footer-->
                     <div class="modal-footer flex-center">
-                        <!--begin::Button-->
-                        <!-- <button
-                type="reset"
-                id="kt_modal_add_customer_cancel"
-                class="btn btn-light me-3"
-              >
-                Discard
-              </button> -->
-                        <!--end::Button-->
+                       
 
-                        <!--begin::Button-->
                         <button
                             :data-kt-indicator="loading ? 'on' : null"
                             class="btn btn-lg btn-primary"
@@ -159,14 +123,31 @@
                                 ></span>
                             </span>
                         </button>
-                        <!--end::Button-->
                     </div>
-                    <!--end::Modal footer-->
                 </el-form>
-                <!--end::Form-->
             </div>
         </div>
     </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref, defineProps, defineEmits } from "vue";
+import { hideModal, showModal } from "@/core/helpers/dom";
+const props = defineProps<{
+    formData: Record<string, any>
+}>()
+
+const emit = defineEmits<{
+    (e: 'submitForm', payload: any): void
+}>()
+
+const addProductModalRef = ref<HTMLElement | null>(null)
+
+function submit() {
+    emit('submitForm', props.formData)
+    closeModal()
+}
+
+function closeModal() {
+    hideModal(addProductModalRef.value);
+}
 </script>

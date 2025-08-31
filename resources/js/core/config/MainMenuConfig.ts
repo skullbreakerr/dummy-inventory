@@ -24,6 +24,11 @@ const MainMenuConfig: Array<MenuItem> = [
         keenthemesIcon: "cube-3",
       },
       {
+        heading:"Products",
+        route:'/product',
+        keenthemesIcon: "cube-2",
+      },
+      {
         heading:"Ask AI",
         route:'/ask-ai',
         keenthemesIcon: "user-tick",

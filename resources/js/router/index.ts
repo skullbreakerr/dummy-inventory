@@ -34,6 +34,15 @@ const routes: Array<RouteRecordRaw> = [
         }
       },
       {
+        path:'/product',
+        name:"product-listing",
+        component: ()=> import('@/views/apps/products/ProductListing.vue'),
+        meta:{
+          pageTitle:"Product",
+          breadcrumbs:["Product"],
+        }
+      },
+      {
         path:'/ask-ai',
         name:"ai-chat",
         component: ()=> import('@/views/apps/ai-assistant/AiChatSection.vue'),
